@@ -145,7 +145,7 @@ log c ≤ (1 + ε) log rad(abc)
 
 ## 🌐 英語版
 
-👉 [English version here (README.md)](https://github.com/Kobayashi2501/Collapse-Theoretic-ABC-Conjecture/blob/main/README.md)
+👉 [English version here (README.md)](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/blob/main/README.md)
 
 ---
 
