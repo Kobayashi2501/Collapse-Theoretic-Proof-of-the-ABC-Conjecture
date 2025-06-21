@@ -140,7 +140,7 @@ We welcome collaboration in:
 
 ## 🌐 Japanese Version
 
-👉 [日本語版はこちら（README_ja.md）](https://github.com/Kobayashi2501/Collapse-Theoretic-ABC-Conjecture/blob/main/README_ja.md)
+👉 [日本語版はこちら（README_ja.md）](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/blob/main/README_jp.md)
 
 ---
 
