@@ -1,24 +1,129 @@
-% ======================================
+% ===============================================
 % Collapse-Theoretic Proof of the ABC Conjecture
-% ======================================
+% ===============================================
 \documentclass[11pt]{article}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm,amsfonts,geometry,hyperref,mathrsfs}
-\geometry{margin=1in}
 
-% === Theorem environments ===
+% === Language and Font ===
+\usepackage[utf8]{inputenc}       % UTF-8 input
+\usepackage[T1]{fontenc}          % T1 font encoding
+\usepackage{fontspec}             % XeLaTeX font support
+\setmainfont{Times New Roman}     % Set main font
+
+% === Math and Symbols ===
+\usepackage{amsmath, amssymb, amsthm, amsfonts}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{stmaryrd}             % For \llbracket etc.
+\usepackage{bm}                   % Bold math symbols
+\usepackage{changepage} 
+% === TikZ and Diagrams ===
+\usepackage{tikz}
+\usepackage{tikz-cd}
+\usetikzlibrary{
+  cd, matrix, arrows.meta, decorations.pathmorphing, calc, positioning
+}
+
+% === Listings for Coq, Code etc. ===
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}             % For rotatebox, scalebox etc.
+
+\lstdefinelanguage{Coq}{
+  keywords={Definition,Theorem,Proof,Qed,Fixpoint,match,with,end,fun,let,in,forall,exists,Inductive,return,Type},
+  keywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  comment=[l]{//},
+  commentstyle=\color{gray},
+  morecomment=[s]{(*}{*)},
+  string=[b]",
+  stringstyle=\color{red},
+}
+
+\lstset{
+  language=Coq,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  breaklines=true,
+  breakindent=0pt,
+  columns=flexible,
+  keepspaces=true,
+  xleftmargin=1em,
+  framexrightmargin=1em,
+  frame=single,
+  captionpos=b
+}
+
+
+
+% === Geometry and Layout ===
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{placeins}             % \FloatBarrier support
+
+% === Hyperlinks ===
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+
+% === Language Support ===
+\usepackage[english]{babel}       % Use English language (place last)
+
+% === Theorem Environments ===
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{definition}[theorem]{Definition}
-\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{axiom}{Axiom}[section]
+\newtheorem{conjecture}{Conjecture}[section]
 
-\title{Collapse-Theoretic Proof of the ABC Conjecture\\via AK High-Dimensional Projection Structures}
-\author{A. Kobayashi \& ChatGPT Research Partner}
+% === Math Operators ===
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\PH}{PH}
+\DeclareMathOperator{\Tor}{Tor}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Coker}{Coker}
+
+% === Custom Shortcuts ===
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\TT}{\mathbb{T}}
+
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cH}{\mathcal{H}}
+
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Sha}{\mathcal{X}}
+
+% === Document Metadata ===
+\title{Collapse-Theoretic Proof of the ABC Conjecture\\
+\Large \textsc{Version 1.0}\\
+\small Based on the AK High-Dimensional Projection Structural Theory v10.0}
+\author{Atsushi Kobayashi \\ \small with ChatGPT Research Partner}
 \date{June 2025}
 
+% === Document Start ===
 \begin{document}
+
 \maketitle
+\tableofcontents
+\newpage
+
 
 % ===========================
 % Chapter 1: Introduction
@@ -225,9 +330,9 @@ In the asymptotic limit \( \mathrm{rad}(abc) \to \infty \), the effective expone
 
 
 % ===========================
-% Chapter 4: Type-Theoretic Formalization of Collapse ⇒ ABC
+% Chapter 4: Type-Theoretic Formalization of Collapse → ABC
 % ===========================
-\section{Type-Theoretic Formalization of Collapse ⇒ ABC}
+\section{Type-Theoretic Formalization of Collapse \texorpdfstring{$\to$}{→} ABC}
 
 To make the derivation of the ABC inequality machine-verifiable, we now encode the structural principles of the AK Collapse framework within a type-theoretic formal system. Our approach is compatible with proof assistants such as Coq, Lean, or Agda, and follows a dependent type logic using Π- and Σ-types.
 
@@ -681,14 +786,12 @@ If \( \mathcal{F}_{abc} \simeq \text{acyclic complex} \) (zero cohomology in deg
 We summarize the structure in the following commutative diagram:
 
 \[
-\resizebox{\textwidth}{!}{%
 \begin{tikzcd}[row sep=large, column sep=large]
 u(t) \arrow[r, "\text{Spectral Decay}"] \arrow[d, swap, "\text{Topological Energy}"]
 & \mathrm{PH}_1(\mathcal{F}_{abc}) = 0 \arrow[d, "\text{Functor Collapse}"] \\
 \mathrm{Ext}^1(\mathcal{F}_{abc}, \mathbb{Q}_\ell) = 0 \arrow[r, "\text{Obstruction Removal}"]
 & u(t) \in C^\infty
 \end{tikzcd}
-}
 \]
 
 \begin{center}
@@ -1207,7 +1310,11 @@ Let:
 
 Then the Collapse structure defines a pipeline of implications:
 \[
-\mathsf{PH}_1(E) = 0 \Rightarrow \Ext^1(E) = 0 \Rightarrow \Sel_\ell(E) = 0 \Rightarrow \Sha(E) = 0 \Rightarrow \text{rank equality}
+\mathsf{PH}_1(E) = 0
+\Rightarrow \operatorname{Ext}^1(E) = 0
+\Rightarrow \operatorname{Sel}_\ell(E) = 0
+\Rightarrow \operatorname{Sha}(E) = 0
+\Rightarrow \text{rank equality}
 \]
 
 ---
