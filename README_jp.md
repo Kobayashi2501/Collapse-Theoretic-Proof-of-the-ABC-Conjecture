@@ -115,6 +115,14 @@ log c ≤ (1 + ε) log rad(abc)
 
 ---
 
+## DOI
+
+このプロジェクトはZenodoに正式にアーカイブされています：
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713895.svg)](https://doi.org/10.5281/zenodo.15713895)
+
+---
+
 ## 🧩 関連理論：AK高次元射影構造（AK-HDPST）
 
 このCollapse ABC定理は、以下の理論に基づいています：
