@@ -110,6 +110,14 @@ Thus:
 
 ---
 
+## DOI
+
+This project has been formally archived on Zenodo:
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713895.svg)](https://doi.org/10.5281/zenodo.15713895)
+
+---
+
 ## 🧩 Related Theory: AK High-Dimensional Projection (AK-HDPST)
 
 The ABC Collapse Theorem is built upon:
