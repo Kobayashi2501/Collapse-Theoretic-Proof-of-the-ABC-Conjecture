@@ -142,7 +142,7 @@ This version is archived at:
 
 ## 🌐 日本語版はこちら
 
-👉 [README_ja.md](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/blob/main/README_ja.md)
+👉 [README_ja.md](https://github.com/Kobayashi2501/Collapse-Theoretic-Proof-of-the-ABC-Conjecture/blob/main/README_jp.md)
 
 ---
 
