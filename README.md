@@ -136,7 +136,7 @@ c ≤ Kε · rad(abc)^(1+ε)
 
 This version is archived at:
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713895.svg)](https://doi.org/10.5281/zenodo.15713895)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15860282.svg)](https://doi.org/10.5281/zenodo.15860282)
 
 ---
 
