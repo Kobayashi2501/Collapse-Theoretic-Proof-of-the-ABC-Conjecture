@@ -12,12 +12,13 @@
 ## 🎯 問題設定：ABC予想とは？
 
 自然数 $a + b = c$ が互いに素（$\gcd(a,b,c) = 1$）であるとき、  
-任意の $\varepsilon > 0$ に対して定数 $K_\varepsilon$ が存在し、以下を満たすとされる予想です：
+任意の $\varepsilon > 0$ に対して定数 $K_{\varepsilon}$ が存在し、以下を満たすとされる予想です：
 
-c < Kε · rad(abc)^(1+ε)
+$$
+c < K_{\varepsilon} \cdot \mathrm{rad}(abc)^{1+\varepsilon}
+$$
 
-
-ここで、$\mathrm{rad}(n)$ は $n$ の異なる素因数の積です（例: rad(18) = 2 × 3 = 6）。
+ここで、$\mathrm{rad}(n)$ は $n$ の異なる素因数の積です（例: $\mathrm{rad}(18) = 2 \times 3 = 6$）。
 
 ---
 
