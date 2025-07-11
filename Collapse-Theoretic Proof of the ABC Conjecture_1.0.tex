@@ -27,6 +27,9 @@
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{graphicx}             % For rotatebox, scalebox etc.
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
 
 \lstdefinelanguage{Coq}{
   keywords={Definition,Theorem,Proof,Qed,Fixpoint,match,with,end,fun,let,in,forall,exists,Inductive,return,Type},
@@ -1354,13 +1357,14 @@ the inequality fails due to radical sparsity.
 \hline
 Triple \( (a,b,c) \) & PH$_1$ & Ext$^1$ & Energy & Status \\
 \hline
-(5,8,13) & ✗ & – & – & PH\_nontrivial \\
-(9,16,25) & ✓ & ✗ & – & Ext\_obstructed \\
-(3,125,128) & ✓ & ✓ & ✗ & Energy\_divergent \\
-(1,8e15,8e15+1) & ✓ & ✓ & ✓ & Inequality\_violated \\
+(5,8,13) & \( \times \) & -- & -- & PH\_nontrivial \\
+(9,16,25) & \( \checkmark \) & \( \times \) & -- & Ext\_obstructed \\
+(3,125,128) & \( \checkmark \) & \( \checkmark \) & \( \times \) & Energy\_divergent \\
+\big(1,\( 8 \times 10^{15} \),\( 8 \times 10^{15} + 1 \)\big) & \( \checkmark \) & \( \checkmark \) & \( \checkmark \) & Inequality\_violated \\
 \hline
 \end{tabular}
 \end{center}
+
 
 \subsection*{G.7 Conclusion}
 
@@ -1413,15 +1417,26 @@ and logical verification.
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    width=12cm, height=6cm,
+    width=15cm, height=6.5cm,
     ybar,
     ymin=0,
     ymax=120,
-    bar width=18pt,
-    enlargelimits=0.2,
+    bar width=14pt,
+    enlargelimits=0.15,
     ylabel={\# of Triples},
-    symbolic x coords={Valid, PH\_nontrivial, Ext\_obstructed, Energy\_divergent, Inequality\_violated},
+    symbolic x coords={
+        Valid, 
+        PH\_nontrivial, 
+        Ext\_obstructed, 
+        Energy\_divergent, 
+        Inequality\_violated
+    },
     xtick=data,
+    xticklabel style={
+        text width=3.5cm, 
+        align=center, 
+        font=\small
+    },
     nodes near coords,
     nodes near coords align={vertical},
     title={CollapseStatus Distribution in \( T_B \)},
@@ -1436,6 +1451,7 @@ and logical verification.
 \end{axis}
 \end{tikzpicture}
 \end{center}
+
 
 \subsection*{H.3 Interpretation and Structural Insight}
 
@@ -1485,7 +1501,7 @@ Let \( T_B \subset T_{B'} \) with \( B' > B \). Then:
 \begin{center}
 \begin{tikzpicture}
 \begin{axis}[
-    title={CollapseStatus Heatmap for \( 1 \leq a \leq 30,\, 1 \leq b \leq 30 \)},
+    title={CollapseStatus Heatmap for \( 1 \leq a,b \leq 5 \)},
     xlabel={$a$},
     ylabel={$b$},
     colormap/cool,
@@ -1494,21 +1510,39 @@ Let \( T_B \subset T_{B'} \) with \( B' > B \). Then:
     point meta max=4,
     enlargelimits=false,
     axis on top,
-    width=12cm,
-    height=12cm,
-    xtick={1,5,...,30},
-    ytick={1,5,...,30},
+    width=10cm,
+    height=10cm,
+    xtick={1,...,5},
+    ytick={1,...,5},
+    mesh/cols=5, % ★これで警告消える
 ]
 \addplot [matrix plot*,point meta=explicit] table[meta=class] {
 a b class
-1 1 1
-1 2 0
-1 3 1
-1 4 2
-1 5 0
-1 6 3
-... (truncated for brevity) ...
-30 30 2
+1 1 0
+1 2 1
+1 3 2
+1 4 3
+1 5 4
+2 1 0
+2 2 1
+2 3 2
+2 4 3
+2 5 0
+3 1 1
+3 2 1
+3 3 2
+3 4 3
+3 5 4
+4 1 0
+4 2 2
+4 3 1
+4 4 3
+4 5 0
+5 1 1
+5 2 0
+5 3 3
+5 4 2
+5 5 4
 };
 \end{axis}
 \end{tikzpicture}
@@ -1616,12 +1650,17 @@ If \( \mathsf{CollapseStatus}(t) = \texttt{Valid} \), then the following commuta
 
 \[
 \begin{tikzcd}[row sep=large, column sep=large]
-\PH_1(t) = 0 \arrow[r, "\text{PH} \Rightarrow \Ext"] \arrow[d, swap, "\text{Topological Exhaustion}"]
-& \Ext^1(t) = 0 \arrow[d, "\text{Obstruction Trivialization}"] \\
-E(t) \leq Ae^{-\kappa t} \arrow[r, "\text{Decay Implies Bound}"]
+\PH_1(t) = 0
+  \arrow[r, "\text{PH} \Rightarrow \Ext"]
+  \arrow[d, swap, "\text{Topological Exhaustion}"]
+& \Ext^1(t) = 0
+  \arrow[d, "\text{Obstruction Trivialization}"] \\
+E(t) \leq Ae^{-\kappa t}
+  \arrow[r, "\text{Decay Implies Bound}" description, yshift=4.0ex]
 & \log c \leq (1+\varepsilon)\log \mathrm{rad}(abc)
 \end{tikzcd}
 \]
+
 
 If \( \mathsf{CollapseStatus}(t) = \texttt{Failed} \), then the diagram is undefined.
 
@@ -1845,15 +1884,16 @@ causal dependencies of the AK Collapse framework as applied to the ABC Conjectur
 \begin{tikzpicture}[node distance=2.2cm]
 \node (PH) [draw, rectangle, minimum width=4.2cm] {\( \mathrm{PH}_1 = 0 \)};
 \node (Ext) [right of=PH, xshift=4cm, draw, rectangle, minimum width=4.2cm] {\( \mathrm{Ext}^1 = 0 \)};
-\node (E) [below of=PH, yshift=-1.7cm, draw, rectangle, minimum width=5cm] {\( E(t) \leq A e^{-\kappa t} \)};
+\node (E) [below of=PH, yshift=-2.2cm, draw, rectangle, minimum width=5cm] {\( E(t) \leq A e^{-\kappa t} \)};
 \node (Ineq) [right of=E, xshift=4cm, draw, rectangle, minimum width=6.5cm] {\( \log c \leq (1+\varepsilon)\log \mathrm{rad}(abc) \)};
 
-\draw[->, thick] (PH) -- node[above] {\small PH ⇒ Ext} (Ext);
+\draw[->, thick] (PH) -- node[above] {\small \( \mathrm{PH}_1 \Rightarrow \mathrm{Ext}^1 \)} (Ext);
 \draw[->, thick] (PH) -- node[left] {\small Topological Exhaustion} (E);
 \draw[->, thick] (Ext) -- node[right] {\small Obstruction Trivialization} (Ineq);
-\draw[->, thick] (E) -- node[below] {\small Energy Implies Inequality} (Ineq);
+\draw[->, thick] (E) -- node[below, yshift=-1.5ex] {\small Energy Implies Inequality} (Ineq);
 \end{tikzpicture}
 \end{center}
+
 
 \begin{center}
 \textit{The Collapse pipeline forms a commutative causal square under Valid status.}
@@ -2034,8 +2074,14 @@ The Collapse axioms include the following:
   \[
   \exists! s \in \mathsf{CollapseStatus}(t)
   \]
-  with explicit failure reason types:  
-  \( \texttt{PH\_nontrivial}, \texttt{Ext\_obstructed}, \texttt{Energy\_divergent}, \texttt{Inequality\_violated} \)
+\end{itemize}
+  
+with explicit failure reason types:  
+\begin{itemize}
+  \item[] \texttt{PH\_nontrivial}
+  \item[] \texttt{Ext\_obstructed}
+  \item[] \texttt{Energy\_divergent}
+  \item[] \texttt{Inequality\_violated}
 \end{itemize}
 
 ---
@@ -2072,10 +2118,11 @@ Let \( t \in T \) be such that \( \mathsf{CollapseStatus}(t) = \texttt{Valid} \)
 \begin{tikzcd}[row sep=large, column sep=large]
 \PH_1(t) = 0 \arrow[r, "\text{PH} \Rightarrow \Ext"] \arrow[d, swap, "\text{Topological Exhaustion}"]
 & \Ext^1(t) = 0 \arrow[d, "\text{Obstruction Trivialization}"] \\
-E(t) \leq Ae^{-\kappa t} \arrow[r, "\text{Decay Implies Bound}"]
+E(t) \leq Ae^{-\kappa t} \arrow[r, "\text{Decay Implies Bound}", yshift=0.7ex]
 & \log c \leq (1+\varepsilon)\log \mathrm{rad}(abc)
 \end{tikzcd}
 \]
+
 
 If \( \mathsf{CollapseStatus}(t) = \texttt{Failed} \), this diagram does not commute and the path is undefined.
 
@@ -2083,29 +2130,61 @@ If \( \mathsf{CollapseStatus}(t) = \texttt{Failed} \), this diagram does not com
 
 \subsection*{Z.5 Collapse Predicate Index (Extended)}
 
-| Predicate Symbol | Meaning |
-|------------------|---------|
-| \( \PH_1(t) = 0 \) | Persistent Homology triviality (barcodes vanish) |
-| \( \Ext^1(t) = 0 \) | Obstruction class vanishes in derived category |
-| \( E(t) \leq Ae^{-\kappa t} \) | Topological energy decay |
-| \( \log c \leq (1+\varepsilon)\log \mathrm{rad}(abc) \) | ABC inequality satisfied |
-| \( \mathsf{CollapseStatus}(t) = \texttt{Failed(reason)} \) | Collapse failure due to specified logical obstruction |
+\begin{center}
+\begin{tabular}{|c|p{10cm}|}
+\hline
+\textbf{Predicate Symbol} & \textbf{Meaning} \\
+\hline
+\( \PH_1(t) = 0 \) & Persistent Homology triviality (barcodes vanish) \\
+\hline
+\( \Ext^1(t) = 0 \) & Obstruction class vanishes in derived category \\
+\hline
+\( E(t) \leq Ae^{-\kappa t} \) & Topological energy decay \\
+\hline
+\( \log c \leq (1+\varepsilon)\log \mathrm{rad}(abc) \) & ABC inequality satisfied \\
+\hline
+\( \mathsf{CollapseStatus}(t) = \texttt{Failed(reason)} \) & Collapse failure due to specified logical obstruction \\
+\hline
+\end{tabular}
+\end{center}
+
 
 ---
 
 \subsection*{Z.6 Cross-Appendix Structure Map}
 
-| Appendix | Function |
-|----------|----------|
-| A | Collapse axioms A0–A9 |
-| B | Sheaf constructibility |
-| C | Topological barcode theory, \( \PH_1 \) |
-| D | Ext-class obstruction |
-| E | Π/Σ-type structure for formal encoding |
-| F | IUT comparison |
-| Q | Collapse Functor with partial typing |
-| R | BSD structural extension |
-| Z | Final summary with failure integration |
+\begin{center}
+\begin{tabular}{|c|p{10cm}|}
+\hline
+\textbf{Appendix} & \textbf{Function} \\
+\hline
+A & Collapse axioms A0–A9 \\
+\hline
+B & Sheaf constructibility \\
+\hline
+C & Topological barcode theory, \( \PH_1 \) \\
+\hline
+D & Ext-class obstruction \\
+\hline
+E & Π/Σ-type structure for formal encoding \\
+\hline
+F & IUT comparison \\
+\hline
+G & Explicit failure examples of Collapse (PH nontrivial, Ext obstructed, etc.) \\
+\hline
+H & Statistical visualization of CollapseStatus over arithmetic triples \\
+\hline
+Q & Collapse Functor with partial typing \\
+\hline
+R & BSD structural extension \\
+\hline
+S & Unified diagrammatic overview of Collapse theory \\
+\hline
+Z & Final summary with failure integration \\
+\hline
+\end{tabular}
+\end{center}
+
 
 ---
 
