@@ -137,7 +137,7 @@ c ≤ K_ε · rad(abc)^(1+ε)
 
 このバージョンは以下でアーカイブされています：
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15713895.svg)](https://doi.org/10.5281/zenodo.15713895)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15860282.svg)](https://doi.org/10.5281/zenodo.15860282)
 
 ---
 
