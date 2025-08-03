@@ -154,7 +154,7 @@ Formal analysis of ε-bounds in strong ABC and beyond
 
 ## 🧾 DOI Archive
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15860282.svg)](https://doi.org/10.5281/zenodo.15860282)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.16731422.svg)](https://doi.org/10.5281/zenodo.16731422)
 
 ---
 
