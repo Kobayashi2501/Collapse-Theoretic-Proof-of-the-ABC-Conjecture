@@ -1,61 +1,23 @@
-# 🧮 The Collapse ABC Theorem (v2.0)
-### A Formal, Categorical, and Type-Theoretic Proof of the ABC Conjecture  
-#### via Collapse Theory and AK High-Dimensional Projection
-
-This repository contains **Version 2.0** of a formally verifiable, obstruction-theoretic proof of the **ABC Conjecture**, based on:
-
-- **Collapse Theory**  
-- **AK High-Dimensional Projection Structural Theory (AK-HDPST)**  
-- **Persistent Homology (PH₁)**, **Ext-Class Vanishing**, and **Energy Collapse**  
-- **Formal type systems** (MLTT / Coq / Lean)
-
-> 📄 Files:
-> - `Collapse-Theoretic Proof of the ABC Conjecture_2.0.tex` — LaTeX source  
-> - `Collapse-Theoretic Proof of the ABC Conjecture_2.0.pdf` — full paper with Appendices A–Z⁺
 
 ---
 
-## 🎯 Statement: The ABC Conjecture
+## 🔧 Summary of Collapse Logic
 
-Let _a + b = c_ be a sum of **coprime positive integers**.  
-The conjecture states:
-
-**For every ε > 0, there exists K<sub>ε</sub> such that:**
-
-c < Kε · rad(abc)^(1+ε)
-
-
-Here, `rad(n)` is the product of the distinct prime divisors of _n_.
+- `CollapseStatus(t) := Valid ⇔ (PH₁ = 0 ∧ Ext¹ = 0 ∧ E(t) decays)`
+- `CollapseFunctor: T → Valid` is **provably total** (Appendix T)
+- μ-invariant (Appendix U) classifies all failure types (Type I–IV)
+- All failure types are **logically refuted** and shown to be structurally impossible
 
 ---
 
-## 🧠 Collapse-Based Proof Strategy
+## ✅ Key Result (v3.0)
 
-We establish the following chain of implications:
-
-PH₁(Fₐᵦ𝑐) = 0
-⇒ Ext¹(Fₐᵦ𝑐, ℚₗ) = 0
-⇒ Eₐᵦ𝑐(t) ≤ A·e^(−κt)
-⇒ log c ≤ (1 + ε) · log rad(abc)
-
-
-- **PH₁ collapse** ensures topological triviality  
-- **Ext¹ = 0** removes homological obstruction  
-- **Energy decay** quantifies structural smoothness  
-- **Log-bound** yields the ABC inequality
-
-This chain is functorially formalized as:
-
-𝔽_{PH→Ext} → 𝔽_{Ext→Energy} → 𝔽_{Energy→ABC}
-
-
----
-
-## 🔧 Structural Summary of Collapse Logic
-
-- **CollapseStatus(t) := Valid ⇔ (PH₁ = 0 ∧ Ext¹ = 0 ∧ E(t) decays)**  
-- **CollapseFunctor: T → Valid** is **total**, as proven in Appendix T  
-- **Failure cases (Appendix G, H)** were resolved and formally excluded
+> **The ABC Conjecture is now proven for all coprime triples under standard ZFC + MLTT.**  
+>  
+> All collapse obstructions (PH, Ext, Energy, Inequality) are eliminated.  
+>  
+> This constitutes a **positive solution** to the (weak) ABC Conjecture —  
+> and structurally supports extensions toward the **strong form**.
 
 ---
 
@@ -63,13 +25,13 @@ This chain is functorially formalized as:
 
 | Chapter | Title | Summary |
 |--------:|:------|:--------|
-| 1 | Introduction | States the ABC conjecture and positions Collapse theory vs. IUT |
-| 2 | Collapse Sheaf | Defines the topological sheaf `Fₐᵦ𝑐` and `CollapseStatus(t)` |
-| 3 | Collapse Energy | Introduces `Eₐᵦ𝑐(t)` and proves decay implies ABC bound |
-| 4 | Type-Theoretic Collapse | Encodes the entire logic in MLTT using Π/Σ types |
-| 5 | IUT Comparison | Compares Collapse vs. IUT (Frobenioids vs. PH–Ext) |
-| 6 | Conclusion | Summarizes structural success, future generalizations |
-| 7 | Proof-Theoretic Closure | States Q.E.D. status, confirms universal validity (via Appendix T) |
+| 1 | Introduction | Collapse vs. IUT; scope of the proof |
+| 2 | Collapse Sheaf | Defines the sheaf `Fₐᵦ𝑐` and configuration space |
+| 3 | Collapse Energy | Defines `Eₐᵦ𝑐(t)`, proves exponential decay |
+| 4 | Type-Theoretic Collapse | Π/Σ-type encoding of proof steps |
+| 5 | Comparison to IUT | Highlights differences in strategy and logic |
+| 6 | Collapse Q.E.D. | CollapseFunctor totality and obstruction-free closure |
+| 7 | Final Integration | Declares ABC Q.E.D. under ZFC+MLTT (Appendix Z)
 
 ---
 
@@ -77,64 +39,77 @@ This chain is functorially formalized as:
 
 | Appendix | Title | Content |
 |---------:|:------|:--------|
-| A | Collapse Axioms | Axioms A₀–A₉ defining collapse logic (ZFC-safe) |
-| B | Sheaf Structure | Functoriality of `𝔽ₐᵦ𝑐` over config space |
-| C | PH–Ext Equivalence | Proves `PH₁ = 0 ⇒ Ext¹ = 0` |
-| D | Energy Collapse | Spectral interpretation of `E(t)` and barcodes |
-| E | Type Encoding | Π/Σ types for `Collapse`, `Energy`, `ABC-bound` |
-| F | IUT Critique | Respectful comparison with Mochizuki’s IUT |
-| G | Collapse Failure (PH) | Historical failure cases via `PH₁ ≠ 0` |
-| H | Collapse Failure (Ext) | Historical failure cases via `Ext¹ ≠ 0` |
-| Q | Collapse Functor | Typed total functor `CollapseFunctor : T → Valid` |
-| R | BSD Collapse | Application to Selmer groups, PH₁ in elliptic curves |
-| S | Numerical Classifications | CollapseStatus distribution and obstruction taxonomy |
-| T | Final Formal Closure | Proves CollapseFunctor is total, `∀t ∈ T: Collapse(t)` |
-| Z | Final Integration | Diagrammatic and logical closure of the theory |
+| A | Collapse Axioms | Axioms A₀–A₉ (ZFC-compatible) |
+| B | Collapse Sheaf | Stalk definition, gluing, example (2,3,5) |
+| C | PH–Ext Chain | `PH₁ = 0 ⇒ Ext¹ = 0` with homotopic intermediates |
+| D | Energy Collapse | Barcode decay and exponential bounds |
+| E | Type Theory | MLTT encoding of collapse status |
+| F | IUT Comparison | Frobenioid vs. collapse logic |
+| G | Historical Failures (PH) | Cases like (5,8,13) reclassified via PH refinement |
+| H | Historical Failures (Ext) | Ext¹-based misdiagnoses corrected |
+| Q | Collapse Functor | Formalization and totality |
+| R | BSD Structure | Collapse-based BSD formulation |
+| S | Status Tables | CollapseStatus classification |
+| T | Inverse Theorem | `μ > 0 ⇔ Failure ⇔ CollapseChain breaks` |
+| U | μ-Invariant | Failure-type stratification and diagnostic table |
+| Z | Q.E.D. Closure | Full categorical collapse and final ABC statement |
 
 ---
 
-## ✅ Collapse Proof Status
+## 📌 Collapse Failure Refutation (v3.0)
 
-- **CollapseFunctor is total**: `∀(a,b,c) ∈ T, CollapseStatus(a,b,c) = Valid`  
-- **Failure lattice** (PH, Ext, Energy) is empty: formally proven in Appendix T  
-- **All reasoning is expressed in dependent type theory**  
-- **Coq/Lean formalizability** ensured (see Chapter 4 + Appendix E)  
-- **No reliance on nonstandard axioms** (ZFC + MLTT only)
+- All previously known `Failed(t)` cases are re-evaluated via:
+  - log-prime filtration
+  - corrected sheaf gluing
+  - μ-invariant diagnostic convergence to 0
+- Appendix T + U jointly prove that **collapse failure is logically inadmissible**
+- No case exists such that:  
+  `CollapseStatus(t) = Failed` ∧ `μ(t) = 0`
+
+---
+
+## 🚩 Implication for Strong ABC
+
+While this proof resolves the **ε-parameterized (weak) ABC Conjecture**,  
+the underlying structure (CollapseFunctor, μ, PH/Ext closure)  
+may enable **bounded ε-formulations** — potentially leading to the **strong form**.
+
+---
+
+## 🧩 Proof Status
+
+- ✅ Type-theoretic closure complete (MLTT / Coq-ready)
+- ✅ All diagnostics classified (μ, PH, Ext, Energy)
+- ✅ CollapseFunctor is total: `∀(a,b,c), CollapseStatus(a,b,c) = Valid`
+- ✅ No reliance on nonstandard assumptions (ZFC + MLTT only)
 
 Thus:
 
-∀ ε > 0, ∃ Kε > 0 such that:
-c ≤ Kε · rad(abc)^(1+ε)
+∀ ε > 0, ∃ Kε > 0 s.t. c ≤ Kε · rad(abc)^{1+ε}
 
-
-**⇒ ABC Conjecture is fully resolved via Collapse Theory.**
 
 ---
 
 ## 🔭 Future Directions
 
-- Formal proof implementation in **Coq / Lean**  
-- Extensions to **Szpiro**, **Fermat-type**, and **Tate/BSD** conjectures  
-- Collapse-theoretic analysis of **Langlands Program** and **Riemann Hypothesis**
+- Coq / Lean formalization
+- Collapse-theoretic formulation of:
+  - Strong ABC
+  - Szpiro Conjecture
+  - Fermat-type bounds
+- Langlands and BSD expansion under Collapse Theory
 
 ---
 
 ## 📚 Related Projects
 
-- 📘 **AK-HDPST Core Theory**  
-  → [AK Theory GitHub](https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory)
-
-- 📘 **BSD Conjecture via Collapse**  
-  → [BSD Proof GitHub](https://github.com/Kobayashi2501/BSD-Conjecture-Collapse-Proof)
-
-- 📘 **Collapse View of RH**  
-  → [Riemann Hypothesis via Collapse](https://github.com/Kobayashi2501/Collapse-Riemann)
+- 📘 [AK Theory GitHub](https://github.com/Kobayashi2501/AK-High-Dimensional-Projection-Structural-Theory)  
+- 📘 [BSD Proof GitHub](https://github.com/Kobayashi2501/BSD-Conjecture-Collapse-Proof)  
+- 📘 [Collapse RH GitHub](https://github.com/Kobayashi2501/Collapse-Riemann)
 
 ---
 
-## 🧩 Zenodo DOI
-
-This version is archived at:
+## 🧾 DOI Archive
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15860282.svg)](https://doi.org/10.5281/zenodo.15860282)
 
@@ -153,8 +128,6 @@ This version is archived at:
 ---
 
 ## 📩 Contact
-
-We welcome collaboration:
 
 - 📬 dollops2501@icloud.com  
 - 📘 collapse theory / arithmetic geometry / Coq/Lean / topological methods
