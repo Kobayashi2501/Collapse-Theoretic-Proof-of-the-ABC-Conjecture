@@ -1,3 +1,45 @@
+# 🧮 The Collapse ABC Theorem (v3.0)
+### A Formal, Categorical, and Type-Theoretic Proof of the ABC Conjecture  
+#### via Collapse Theory and AK High-Dimensional Projection
+
+This repository contains **Version 3.0** of a fully formalized, obstruction-theoretic proof of the **ABC Conjecture**, based on:
+
+- **Collapse Theory**
+- **AK High-Dimensional Projection Structural Theory (AK-HDPST)**
+- **Persistent Homology (PH₁)**, **Ext-Class Vanishing**, and **Energy Collapse**
+- **Formal type systems** (MLTT / Coq / Lean)
+- **μ-invariant classification and failure stratification**
+
+> 📄 Files:
+> - `Collapse-Theoretic Proof of the ABC Conjecture_3.0.tex` — LaTeX source  
+> - `Collapse-Theoretic Proof of the ABC Conjecture_3.0.pdf` — full paper with Appendices A–Z⁺
+
+---
+
+## 🎯 Statement: The ABC Conjecture
+
+Let _a + b = c_ be a sum of **coprime positive integers**.  
+Then:
+
+**For every ε > 0, there exists K<sub>ε</sub> such that:**  
+**c < Kε · rad(abc)<sup>1+ε</sup>**
+
+Here, `rad(n)` denotes the product of the distinct prime divisors of _n_.
+
+---
+
+## 🧠 Collapse-Based Proof Strategy
+
+We establish the following logical chain:
+
+- PH₁(Fₐᵦ𝑐) = 0  
+- ⇒ Ext¹(Fₐᵦ𝑐, ℚₗ) = 0  
+- ⇒ Eₐᵦ𝑐(t) ≤ A·exp(−κt)  
+- ⇒ log c ≤ (1 + ε) · log rad(abc)
+
+This is formalized functorially as:
+
+𝔽_{PH→Ext} → 𝔽_{Ext→Energy} → 𝔽_{Energy→ABC}
 
 ---
 
